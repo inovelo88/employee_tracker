@@ -45,8 +45,8 @@ let employeeQuestions = [
 var con = mysql.createConnection({
   host: "localhost",
   port: 3306,
-  user: "YOUR USER ID",
-  password: "YOUR PASSWORD",
+  user: "root",
+  password: "Gatsby88!",
   database: "employee_tracker_db",
   multipleStatements: true
 });
@@ -85,7 +85,7 @@ function start() {
         });
       }
       if (answer.action == "View roles") {
-        let sql = "SELECT * FROM role;";
+        let sql = "SELECT role.id, role.title, role.salary, department.name AS 'department name' FROM role LEFT join department on role.department_id=department.id";
         con.query(sql, (err, row) => {
           if (err) throw err;
           console.table(row);
